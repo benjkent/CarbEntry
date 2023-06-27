@@ -1,0 +1,116 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-100 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <h1>Current Address of Residency</h1>
+    <p class="lead">This address must match your Residency Issued Identification Document.</p>
+    <p class=" small">Postal Box and Mailing only addresses are not acceptable. </p>
+  <form #applicationForm="ngForm" (ngSubmit)="onNext()">
+    <div class="input-group mb-3" >
+      <label class="input-group-text" for="streetAddress">Street Address</label>
+      <input class="form-control" name="streetAddress" id="streetAddress" [(ngModel)]="model.streetAddress"
+         pattern="^[a-zA-Z0-9\s\.,#'-]+$" required minlength="5" #streetEntry="ngModel" />
+    </div>
+    <div [hidden]="streetEntry.valid || streetEntry.pristine">
+      <p class="validate">A correctly formatted Address is required.</p>
+    </div>
+    <div class="input-group mb-3" >
+      <label class="input-group-text" for="aptUnitNumber">Apartment or Unit #</label>
+      <input class="form-control" name="aptUnitNumber" id="aptUnitNumber" [(ngModel)]="model.aptOrUnitNumber"
+             pattern="^[a-zA-Z0-9\s\.,#'-]+$" #aptEntry="ngModel"/>
+    </div>
+    <div [hidden]="aptEntry.valid || aptEntry.pristine">
+      <p class="validate">A correctly formatted Apartment or Unit is needed.</p>
+    </div>
+    <div class="input-group mb-3" >
+      <label class="input-group-text" for="city">City</label>
+      <input class="form-control" name="city" id="city" [(ngModel)]="model.city"
+             pattern="^[a-zA-Z0-9\s\.,#'-]+$" required minlength="2" #cityEntry="ngModel"/>
+    </div>
+    <div [hidden]="cityEntry.valid || cityEntry.pristine">
+      <p class="validate">A correctly formatted City is required.</p>
+    </div>
+    <div class="input-group mb-3" >
+      <label class="input-group-text" for="state">State</label>
+      <input class="form-control" name="state" id="state" [(ngModel)]="model.state"
+             pattern="^[a-zA-Z\s\.,#'-]+$" required minlength="2" #stateEntry="ngModel"/>
+    </div>
+    <div [hidden]="stateEntry.valid || stateEntry.pristine">
+      <p class="validate">A correctly formatted State is required.</p>
+    </div>
+    <div class="input-group mb-3" >
+      <label class="input-group-text" for="zipCode">Zip Code</label>
+      <input class="form-control" name="zipCode" id="zipCode" [(ngModel)]="model.zipCode"
+             pattern="^[0-9\s\-]+$" required minlength="5" #zipCodeEntry="ngModel"/>
+    </div>
+    <div [hidden]="zipCodeEntry.valid || zipCodeEntry.pristine">
+      <p class="validate">A correctly formatted ZipCode is required.</p>
+    </div>
+    <div class="input-group mb-3" >
+      <label class="input-group-text" for="phoneNumber">Phone Number</label>
+      <input class="form-control" name="phoneNumber" id="phoneNumber" [(ngModel)]="model.phoneNumber"
+      pattern="^\+?\d{1,3}[\s-]?\(?\d{1,4}\)?[\s-]?\d{3,}$" required minlength="10" #phoneEntry="ngModel" />
+    </div>
+    <div [hidden]="phoneEntry.valid || phoneEntry.pristine">
+      <p class="validate">A correctly formatted Phone Number is required.</p>
+    </div>
+    <div class="mb-3">
+      <h2>Proof of State Residence Document Type:</h2>
+      <p class="lead">A copy of this document must be submitted with application.</p>
+    </div>
+
+    <div class="input-group mb-3 justify-content-center">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-dark">
+          <input type="radio" name="residencyProofType" id="option1" autocomplete="on"
+           value="Drivers License" [(ngModel)]="model.residencyProofType"
+          required > Driver's License
+        </label>
+        <label class="btn btn-dark">
+          <input type="radio" name="residencyProofType" id="option2" autocomplete="off"
+          value="Property Deed" [(ngModel)]="model.residencyProofType"
+          required > Real Property Ownership
+        </label>
+        <label class="btn btn-dark">
+          <input type="radio" name="residencyProofType" id="option3" autocomplete="off"
+          value="Voter Registration" [(ngModel)]="model.residencyProofType"
+          required > Voter Registration
+        </label>
+        <label class="btn btn-dark">
+          <input type="radio" name="residencyProofType" id="option4" autocomplete="off"
+          value="Tax Document" [(ngModel)]="model.residencyProofType"
+          required > State Tax Return
+        </label>
+        <label class="btn btn-dark">
+          <input type="radio" name="residencyProofType" id="option5" autocomplete="off"
+          value="Alternate" [(ngModel)]="model.residencyProofType"
+          required > Other
+        </label>
+      </div>
+    </div>
+    <div class="mb-3" [hidden]="model.residencyProofType == ''">
+      <label for="formFile" class="form-label">Please attach an image ( .jpg or .png ) of your {{model.residencyProofType}} document.</label>
+      <input class="form-control" type="file" id="formFile" [(ngModel)]="model.residencyProofDocument"
+      name="residencyProofDocument" ValidateJPG required accept="image/jpeg, image/png" >
+      <div class="row">
+        <div id="docWarning" hidden="true">
+          <p class="validate">A valid document in .jpg or .png file format is required.</p>
+        </div>
+      </div>
+
+    </div>
+    <button class="btn btn-outline-light" type="submit"
+     [disabled]="!applicationForm.valid">Next</button>
+  </form>
+  </main>
+  <footer class="mt-5 my-auto text-white-50">
+    <p>
+      Cover for testing
+      <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+      , from
+      <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+    </p>
+
+  </footer>
+</div>
+</body>

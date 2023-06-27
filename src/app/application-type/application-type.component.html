@@ -1,0 +1,25 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-100 text-center text-bg-dark">
+  <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main class="px-3 my-5">
+      <h1>{{newTitleText}}</h1>
+      <p class="lead">
+        {{newText}}
+      </p>
+      <p class="lead">
+        <a class="btn btn-lg btn-light fw-bold border-white bg-white"
+          (click)="onNewClick()">{{newButtonText}}</a>
+      </p>
+    </main>
+    <footer class="mt-auto text-white-50">
+      <p>
+        Cover for testing
+        <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+        , from
+        <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+      </p>
+    </footer>
+  </div>
+</body>
+
+

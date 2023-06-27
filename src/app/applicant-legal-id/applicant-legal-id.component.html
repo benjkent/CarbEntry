@@ -1,0 +1,64 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-100 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <h1>Legal Name</h1>
+    <p class="lead">Enter your legal name<br> This could be different from the name on your Government Issued ID.</p>
+
+  <form #applicationForm="ngForm" (ngSubmit)="onNext()">
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="firstName">First Name</label>
+      <input class="form-control" name="firstName" id="firstName" [(ngModel)]="model.firstName"
+       pattern="^[a-zA-Z.-]+$" required minlength="1" #firstNameEntry="ngModel" />
+    </div>
+    <div [hidden]="firstNameEntry.valid || firstNameEntry.pristine">
+      <p class="validate">A correctly formatted Name is required</p>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="middleName">Middle Name</label>
+      <input class="form-control" name="middleName" id="middleName" [(ngModel)]="model.middleName"
+       pattern="^[a-zA-Z.-]+$" required minlength="1" #middleNameEntry="ngModel"/>
+    </div>
+    <div [hidden]="middleNameEntry.valid || middleNameEntry.pristine">
+      <p class="validate">A correctly formatted Middle name is required</p>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="lastName">Last Name</label>
+      <input class="form-control" name="lastName" id="lastName" [(ngModel)]="model.lastName"
+        pattern="^[a-zA-Z.-]+$" required minlength="1" #lastNameEntry="ngModel"/>
+    </div>
+    <div [hidden]="lastNameEntry.valid || lastNameEntry.pristine">
+      <p class="validate"> A Correctly formatted Last name is required </p>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="suffix">Suffix ( Jr. Sr. IV  )</label>
+      <input class="form-control" name="suffix" id="suffix" [(ngModel)]="model.suffix"
+      pattern="^[a-zA-Z1-0.-]+$" minlength="1" #suffixEntry="ngModel" />
+    </div>
+    <div [hidden]="suffixEntry.valid || suffixEntry.pristine">
+      The suffix was not formatted correctly
+    </div>
+    <p style="font-size: large">All other names used (Maiden, Married, Aliases)</p>
+
+    <div class="input-group mb-3" *ngIf="additionalNameFields">
+      <label class="input-group-text" for="additionalNames">Additional Names</label>
+      <textarea class="form-control" name="additionalNames" id="additionalNames" [(ngModel)]="model.additionalNames"
+                rows="3" cols="50"></textarea>
+    </div>
+    <button class="btn btn-light mx-4" type="button" (click)="addAdditionalName()"
+    [disabled]="!applicationForm.valid">Add Additional Names</button>
+    <button class="btn btn-outline-light" type="submit"
+            [disabled]="!applicationForm.valid">Next</button>
+
+  </form>
+</main>
+  <footer class="mt-5 my-auto text-white-50">
+    <p>
+      Cover for testing
+      <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+      , from
+      <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+    </p>
+  </footer>
+</div>
+</body>
