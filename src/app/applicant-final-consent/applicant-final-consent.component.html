@@ -1,0 +1,165 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-50 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <div class="mb-5">
+      <h1>Applicant Consent and Acknowledgments</h1>
+      <p class="lead">The following acknowledgments are required as part of this application.</p>
+      <p class="strong">Read and initial each of the statements to complete this application</p>
+    </div>
+
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()" ngNativeValidate >
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-10">
+            <span >
+              I understand that I will be fingerprinted and photographed.
+            </span>
+          </div>
+          <div class="col-2">
+            <input class="form-control" name="fingerPrintedAndPhotographed" id="fingerprintedPhotographed"
+                   required [ngModel]="model.fingerPrintedAndPhotographed" #fingerPrintedAndPhotographed="ngModel"
+                    pattern="[a-zA-Z]*"
+            />
+            <div [hidden]="fingerPrintedAndPhotographed.valid || fingerPrintedAndPhotographed.pristine">
+              <p class="validate">Valid initials required</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-10">
+            <span>I certify I have read and understand the entire text of this application. The information and declarations I
+              provided are correct and true to the best of my knowledge. I understand making false statements on this
+              application is a misdemeanor crime and that I may be prosecuted or have my application denied, or my
+              Permit to Purchase revoked.</span>
+          </div>
+          <div class="col-2">
+            <input class="form-control" name="applicantCertification" required
+             pattern="[a-zA-Z]*" [ngModel]="model.applicantLegalAgreement" #legalAgreement="ngModel" />
+            <div [hidden]="legalAgreement.valid || legalAgreement.pristine">
+              <p class="validate">Valid initials required</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-10">
+            <span>I certify that I have completed an approved Firearms Safety Course.</span>
+          </div>
+          <div class="col-2">
+            <input class="form-control" name="safetyCourse" required  pattern="[a-zA-Z]*"
+              [ngModel]="model.applicantFirearmsCourse" #firearmsCourse="ngModel" />
+            <div [hidden]="firearmsCourse.valid || firearmsCourse.pristine">
+              <p class="validate">Valid initials required</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-5">
+          </div>
+          <div class="col-10">
+            <span>Date of Safety Course completion.</span>
+          </div>
+          <div class="col-2">
+            <input class="form-control" name="safetyCourseDate"  required hyphenate
+             pattern="[0-9/-]*" #courseDate="ngModel" [ngModel]="model.firearmsCourseDate" />
+            <div [hidden]="courseDate.valid || courseDate.pristine">
+              <p class="validate">Valid date required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+            <label for="formFile" class="form-label">Please attach an image ( .jpg ) of your Certificate of Completion document.</label>
+            <input class="form-control" type="file" id="formFile"
+                   name="completionDoc" required [(ngModel)]="model.firearmsCourseJPG"
+            #firearmsCourseDoc="ngModel" ValidateJPG >
+        </div>
+
+        <div class="row">
+          <div id="docWarning" hidden="true">
+            <p class="validate">Valid document in .jpg format required.</p>
+          </div>
+        </div>
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-8">
+            <label for="applicantSignature" class="form-label">Signature of Applicant</label>
+            <input class="form-control" name="applicantSignature" id="applicantSignature" type="text"
+                   required [(ngModel)]="model.applicantSignature" #applicantSignature="ngModel"
+                    pattern="[a-zA-Z.-]+*"/>
+          </div>
+          <div class="col-4">
+            <label class="form-label">Date</label>
+            <input class="form-control"name="applicantSignatureDate" type="text"
+              required [(ngModel)]="model.applicantSignatureDate" #applicantSignatureDate="ngModel"
+             hyphenate pattern="[0-9/-]*" >
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-8">
+              <div [hidden]="applicantSignature.valid || applicantSignature.pristine">
+                <p class="validate">Valid signature required</p>
+              </div>
+            </div>
+            <div class="col-4">
+              <div [hidden]="applicantSignatureDate.valid || applicantSignatureDate.pristine">
+                <p class="validate">Valid date required</p>
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+          <p class="lead">
+            **Permit Agent, by signing this application you certify that the applicant has presented documentation of their
+            demonstrated in-person proficiency in their ability to lock, load, unload, fire, and store a firearm***
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <label for="permitAgentSignature" class="form-label">Signature of Permit Agent</label>
+            <input class="form-control" name="permitAgentSignature" id="permitAgentSignature" type="text"
+            required [(ngModel)]="model.permitAgentSignature" #permitAgentSignature="ngModel"
+                   pattern="[a-zA-Z.-]+*"/>
+          </div>
+          <div class="col-4">
+            <label class="form-label" for="permitAgentSignatureDate">Date</label>
+            <input class="form-control" id="permitAgentSignatureDate" name="permitAgentSignatureDate" type="text"
+             required hyphenate [(ngModel)]="model.permitAgentSignatureDate" #permitAgentSignatureDate="ngModel"
+                   pattern="[0-9/-]*" >
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div [hidden]="permitAgentSignature.valid || permitAgentSignature.pristine">
+              <p class="validate">Valid signature required</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div [hidden]="permitAgentSignatureDate.valid || permitAgentSignatureDate.pristine">
+              <p class="validate">Valid date required</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <button class="btn btn-outline-light" type="submit"
+                [disabled]="!applicationForm.valid ">Next</button>
+    </form>
+
+  </main>
+</div>
+
+</body>

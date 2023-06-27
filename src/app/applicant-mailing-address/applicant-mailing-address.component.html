@@ -1,0 +1,70 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-100 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <h1>Mailing Address</h1>
+    <p class="lead">This address must be able to accept mail from the United States Postal Service.</p>
+
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()">
+      <div class="input-group mb-3 justify-content-center">
+        <label class="btn btn-dark pt-3">
+          <input type="checkbox" class="m-3" name="sameAsResidence"
+          [(ngModel)]="model.sameAsResidence" (click)="sameAsResidenceSelected()">
+          My mailing address is the same as my residential address.
+        </label>
+      </div>
+      <div class="mb-3">
+        <p class=" small">Postal Box Addresses and Business Addresses are acceptable.</p>
+      </div>
+
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="streetAddress">Street Address</label>
+        <input class="form-control" name="streetAddress" id="streetAddress" [(ngModel)]="model.mailingAddress"
+               pattern="^[a-zA-Z0-9\s\.,#'-]+$" minlength="5" #streetEntry="ngModel"
+               [disabled]="model.sameAsResidence==true" [required]="!sameAsResidence" />
+      </div>
+      <div [hidden]="streetEntry.valid || streetEntry.pristine || model.sameAsResidence==true">
+        <p class="validate"> correctly formatted Address is required. </p>
+      </div>
+
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="city">City</label>
+        <input class="form-control" name="city" id="city" [(ngModel)]="model.city"
+               pattern="^[a-zA-Z0-9\s\.,#'-]+$"  minlength="2" #cityEntry="ngModel"
+               [disabled]="model.sameAsResidence==true" [required]="!sameAsResidence" />
+      </div>
+      <div [hidden]="cityEntry.valid || cityEntry.pristine || model.sameAsResidence==true">
+        <p class="validate"> A correctly formatted City is required.</p>
+      </div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="state">State</label>
+        <input class="form-control" name="state" id="state" [(ngModel)]="model.state"
+               pattern="^[a-zA-Z\s\.,#'-]+$"  minlength="2" #stateEntry="ngModel"
+               [disabled]="model.sameAsResidence==true" [required]="!sameAsResidence" />
+      </div>
+      <div [hidden]="stateEntry.valid || stateEntry.pristine || model.sameAsResidence==true">
+        <p class="validate">A correctly formatted State is required.</p>
+      </div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="zipCode">Zip Code</label>
+        <input class="form-control" name="zipCode" id="zipCode" [(ngModel)]="model.zipCode"
+               pattern="^[0-9\s\-]+$"  minlength="5" #zipCodeEntry="ngModel"
+               [disabled]="model.sameAsResidence==true" [required]="!sameAsResidence" />
+      </div>
+      <div [hidden]="zipCodeEntry.valid || zipCodeEntry.pristine || model.sameAsResidence==true">
+        <p class="validate">A correctly formatted ZipCode is required.</p>
+      </div>
+      <button class="btn btn-outline-light" type="submit" [disabled]="!model.sameAsResidence && !applicationForm.valid">
+        Next</button>
+    </form>
+  </main>
+  <footer class="mt-5 my-auto text-white-50">
+    <p>
+      Cover for testing
+      <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+      , from
+      <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+    </p>
+  </footer>
+</div>
+</body>

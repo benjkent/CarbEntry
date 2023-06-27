@@ -1,0 +1,43 @@
+[
+  {
+    "type": "age",
+    "statement": "I am now at least 18 years of age."
+  },
+  {
+    "type": "conviction-felony",
+    "statement": "I have NEVER been convicted in any court, including a military court, of a felony, or any other crime for which the judge could have imprisoned me for more than one year, even if you received a shorter sentence including probation."
+  },
+  {
+    "type": "conviction-domestic",
+    "statement": "I have NOT been convicted of a misdemeanor Domestic Violence crime."
+  },
+  {
+    "type" : "mental-health",
+    "statement": "I  have NEVER been adjudicated as a mental defective or have never been committed to a mental institution."
+  },
+  {
+    "type": "restraining-order",
+    "statement":"I have NOT been subject to a court order, including a Military Protection Order issued by a military judge or magistrate, restraining me from harassing, stalking, or threatening a family member or household member. ORS 166.255 (1) (a), ORS 163.732, ORS 166.255 (1)(c), OR136.230"
+  },
+  {
+    "type": "probation-firearms",
+    "statement": "I am NOT on probation with conditions limiting possession of a firearm- ORS 137.540 (L)"
+  },
+  {
+    "type": "narcotics-use",
+    "statement": "I am NOT an unlawful user of, or addicted to, marijuana or any depressant, stimulant, narcotic drug, or any other controlled substance. Warning: The use or possession of marijuana remains unlawful under Federal law regardless of whether it has been legalized or decriminalized for medicinal or recreational purposes in the state where you reside."
+  },
+  {
+    "type": "warrants-felony",
+    "statement": "There are no outstanding felony warrants for my arrest. "
+  },
+  {
+    "type": "restraining-order-felony",
+    "statement": "I  am NOT subject to a court order restraining me from contacting or stalking another or under indictment or information in any court for a felony, or any other crime for which the judge could imprison me for more than one year nor am I a current member of the military who has been charged with violations (s) of the Uniform Code of Military Justice and whose charge (s) have been referred to a general court-martial. "
+  },
+  {
+    "type": "dishonorable-discharge",
+    "statement": "I have never received a dishonorable discharge (enlisted members) or received a dismissal (commissioned officers) from the Armed Forces of the United States."
+  }
+]
+

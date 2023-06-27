@@ -1,0 +1,120 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-100 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <h1>Country of Citizenship</h1>
+    <p class="lead">Check or list more than one, if applicable. Nationals of the United States may check U.S.A.</p>
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()" >
+
+      <div class="row mb-3">
+        <p>I am a citizen of</p>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" name="citizenOf" value="USA"  autocomplete="off"
+             [(ngModel)]="model.citizenOf" required> USA
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="citizenOf" value="USA-Additional" autocomplete="off"
+                   [(ngModel)]="model.citizenOf" required > Other Country or Countries
+          </label>
+        </div>
+      </div>
+      <div [hidden]="model.citizenOf == 'USA'">
+      <div class="row mb-5" >
+        <p>If you are an alien, record your U.S. issued alien or admission number here</p>
+        <div class="input-group">
+        <div class="col-6">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary">
+              <input type="radio" value="AR" name="alienAdmissionType"  autocomplete="off"
+              [(ngModel)]="model.alienAdmissionType.type" >AR#
+            </label>
+            <label class="btn btn-secondary mx-1">
+              <input type="radio" value="USCIS" name="alienAdmissionType"  autocomplete="off"
+                     [(ngModel)]="model.alienAdmissionType.type" > USCIS#
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" value="I94" name="alienAdmissionType"  autocomplete="off"
+                     [(ngModel)]="model.alienAdmissionType.type" > I94#
+            </label>
+          </div>
+        </div>
+          <div class="col-6">
+            <input class="form-control" type="text" name="alienAdmissionTypeNumber"
+                  [(ngModel)]="model.alienAdmissionType.number" placeholder="AR#, USCIS#, or I94#"/>
+          </div>
+        </div>
+
+      </div>
+      <div class="row mb-5" >
+        <div class="input-group">
+          <div class="col">
+            <label class="mx-2">Are you an alien who has been admitted to the United States under a non-immigrant visa?</label>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary">
+                <input type="radio" name="nonImmigrantVisa" [(ngModel)]="model.nonImmigrantVisa"
+                       value="yes"  autocomplete="off"> Yes
+              </label>
+              <label class="btn btn-secondary mx-1">
+                <input type="radio" name="nonImmigrantVisa" [(ngModel)]="model.nonImmigrantVisa"
+                       value="no"  autocomplete="off"> No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div [hidden]="model.nonImmigrantVisa=='no'">
+      <div class="row mb-3" >
+          <div class="col" >
+            <label class="mx-2">If you are such an alien, do you fall within any of the exceptions stated in the instructions?</label>
+          </div>
+        </div>
+      <div class="row mb-3" >
+        <div class="col">
+          <label class="small">U.S. Citizens / Nationals leave this entry blank.</label>
+        </div>
+        <div class="input-group">
+          <div class="col-3">
+          </div>
+            <div class="col-6 ">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="exempt">I fall within the exceptions</label>
+                <input type="text" class="form-control" name="exception" id="exempt" placeholder="yes or no"
+                       [(ngModel)]="model.exception" appLowercase
+                maxlength="3" minlength="2">
+                </div>
+              </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+          <div [hidden]="model.exception != 'yes'" >
+      <div class="row mb-3" >
+        <div class="col">
+          <p class="lead">Exception to the Non-immigrant Alien Prohibition: </p>
+        </div>
+        <p>If the applicant answered “yes” to the above question, record the type of
+          documentation showing the exception to the prohibition and attach a copy.</p>
+      </div>
+          <div class="mb-3" >
+            <label for="formFile" class="form-label">Please attach an image ( .jpg ) of your {{model.exceptionDoc}} document.</label>
+            <input class="form-control" type="file" id="formFile" [(ngModel)]="model.exceptionDoc"
+                   name="exceptionDoc" >
+          </div>
+        </div>
+      </div>
+      </div>
+      <button class="btn btn-outline-light" type="submit"
+              [disabled]="!applicationForm.form.valid">Next</button>
+    </form>
+  </main>
+  <footer class="mt-5 my-auto text-white-50">
+    <p>
+      Cover for testing
+      <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+      , from
+      <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+    </p>
+  </footer>
+
+</div>
+</body>

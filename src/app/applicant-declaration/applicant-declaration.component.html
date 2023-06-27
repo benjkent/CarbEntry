@@ -1,0 +1,32 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-200 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <div class="mb-5">
+      <h1>Declarations</h1>
+      <p class="lead">Initial each box below indicating you have read each statement and you declare the statement is true.</p>
+      <p class="strong">If a statement is untrue do not initial the box</p>
+    </div>
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()" >
+      <div class="container" *ngFor="let s of applicantStatement | async">
+        <div class="container mb-5">
+          <div class="row">
+            <div class="col-9">
+            <span >
+              {{s.statement}}
+            </span>
+            </div>
+            <div class="col-2">
+              <input class="form-control" name="{{s.type}}" id="age"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline-light" type="submit"
+              [disabled]="!applicationForm.form.valid">Next</button>
+    </form>
+  </main>
+</div>
+
+</body>

@@ -1,0 +1,44 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-100 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <h1>Additional Residence Addresses</h1>
+    <p class="lead">Please list any other residences where you have lived in the past three years</p>
+    <p class="lead"></p>
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()">
+      <div class="input-group mb-3 justify-content-center">
+        <label class="btn btn-dark pt-3">
+          <input type="checkbox" class="m-3" name="sameAsResidence"
+                 checked="[sameForLastThree]" (click)="clearAdditional()">
+          I have lived at my current address for the past three years.
+        </label>
+      </div>
+      <div *ngFor="let address of residences; index as i" class="mb-3">
+        {{address}}
+        <button class="btn btn-light btn-sm" (click)="removeAddress(i)">Delete</button>
+      </div>
+      <div class="input-group mb-3" *ngIf="!sameForLastThree" >
+        <label class="input-group-text" for="streetAddress">
+          Additional Address </label>
+        <input class="form-control " name="additionalAddress" id="streetAddress" [(ngModel)]="model.address"
+               pattern="^[a-zA-Z0-9\s\.,#'-]+$" required minlength="5" #streetEntry="ngModel"
+               (click)="resetErrorMessage()"  />
+      <button class="btn btn-outline-light" type="button" (click)="addAddress()">Add</button>
+      </div>
+      <div [hidden]="hideAddressErrorMessage">
+        <p>Not a valid address.</p>
+      </div>
+      <button class="btn btn-outline-light" type="submit"
+              [disabled]="sameForLastThree == false && residences.length==0">Next</button>
+    </form>
+  </main>
+  <footer class="mt-5 my-auto text-white-50">
+    <p>
+      Cover for testing
+      <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+      , from
+      <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+    </p>
+  </footer>
+</div>
+</body>

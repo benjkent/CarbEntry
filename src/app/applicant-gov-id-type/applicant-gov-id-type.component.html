@@ -1,0 +1,216 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-150 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <h2>Government Issued ID Type</h2>
+    <p class="lead">You must provide identification that includes your photograph.</p>
+    <p class=" small">(Driver's License, Passport, Government issued ID card or certified birth certificate.) </p>
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()">
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="idNumber">Government Issued ID Number</label>
+        <input class="form-control" name="govIssueIdNumber" id="idNumber" [(ngModel)]="model.govIssueIdNumber"
+               pattern="^[a-zA-Z0-9\s\.,#'-]+$" required minlength="4" #idNumberEntry="ngModel" />
+      </div>
+      <div [hidden]="idNumberEntry.valid || idNumberEntry.pristine"
+           class="alert alert-dark"> A correctly formatted ID Number is required.
+      </div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="state">State</label>
+        <input class="form-control" name="state" id="state" [(ngModel)]="model.state"
+               pattern="^[a-zA-Z0-9\s\.,#'-]+$" #stateEntry="ngModel"/>
+      </div>
+      <div [hidden]="stateEntry.valid || stateEntry.pristine"
+           class="alert alert-dark"> A correctly formatted State is needed.
+      </div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="expiration">Expiration</label>
+        <input class="form-control" name="expiration" id="expiration" [(ngModel)]="model.expiration"
+               hyphenate
+               pattern="^[0-9\-]+$" required minlength="8" maxlength="10" required minlength="2" #expirationEntry="ngModel"/>
+      </div>
+      <div [hidden]="expirationEntry.valid || expirationEntry.pristine"
+           class="alert alert-dark"> A correctly formatted Expiration Date ( 01-02-1234 ) is required.
+      </div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="dob">Date of Birth</label>
+        <input class="form-control" name="dateOfBirth" id="dob" [(ngModel)]="model.dateOfBirth"
+            hyphenate
+               pattern="^[0-9\-]+$" required minlength="8" maxlength="11" #dobEntry="ngModel"/>
+      </div>
+      <div [hidden]="dobEntry.valid || dobEntry.pristine"
+           class="alert alert-dark"> A correctly formatted complete Date ( 01-02-1234 ) is required.
+      </div>
+      <div class="mb-3">
+        <p class="strong">Disclosure of your social security number is voluntary</p>
+      </div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="ssn">Social Security Number (optional)</label>
+        <input class="form-control" name="ssn" id="ssn" [(ngModel)]="model.ssn"
+               pattern="\d{3}-\d{2}-\d{4}" minlength="11" maxlength="11" #ssnEntry="ngModel"/>
+      </div>
+      <div [hidden]="ssnEntry.valid || ssnEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value ( 123-45-6789 ) is required.
+      </div>
+      <div class="mb-3">
+        <p class="lead">Solicitation of the number is authorized under
+          ORS 166.291. It will be used only as a means of identification.</p>
+      </div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="weight">Weight</label>
+        <input class="form-control" name="weight" id="weight" [(ngModel)]="model.weight"
+               pattern="^[0-9]+$" required minlength="2" maxlength="3" #weightEntry="ngModel"/>
+
+        <label class="input-group-text" >Height</label>
+        <input class="form-control" id="feetHeight" name="height.feet" [(ngModel)]="height.feet"
+               pattern="^[0-9]+$" required minlength="1" maxlength="5" #feetHeightEntry="ngModel" />
+        <label class="input-group-text" for="feetHeight">feet</label>
+        <input class="form-control" id="inchesHeight" name="inchesHeight" [(ngModel)]="height.inches"
+               pattern="^[0-9]+$" required minlength="1" maxlength="5" #inchesHeightEntry="ngModel" />
+        <label class="input-group-text" for="inchesHeight">inches</label>
+      </div>
+      <p>Model: {{applicationForm.value  | json}}</p>
+      <div [hidden]="weightEntry.valid || weightEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value numbers only is required.
+      </div>
+      <div [hidden]="feetHeightEntry.valid || feetHeightEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value is required.
+      </div>
+      <div [hidden]="inchesHeightEntry.valid || inchesHeightEntry.pristine"
+           class="alert alert-dark">A value must be entered here.</div>
+      <div class="input-group mb-3" >
+        <label class="input-group-text" for="eyeColor">Eye Color</label>
+        <input class="form-control" name="eyeColor" id="eyeColor" [(ngModel)]="model.eyeColor"
+               pattern="^[a-zA-Z]+$" required  #eyeColorEntry="ngModel"/>
+        <label class="input-group-text" for="hairColor">Hair Color</label>
+        <input class="form-control" name="hairColor" id="hairColor" [(ngModel)]="model.hairColor"
+               pattern="^[a-zA-Z]+$" required  #hairColorEntry="ngModel"/>
+      </div>
+      <div [hidden]="eyeColorEntry.valid || eyeColorEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value is required.
+      </div>
+
+      <div [hidden]="hairColorEntry.valid || hairColorEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value is required.
+      </div>
+      <div class="input-group mb-3 ">
+        <label class="input-group-text" >Race</label>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-dark">
+            <input type="radio" name="race" id="raceoption1" autocomplete="on"
+                   value="Asian / Pacific Islander" [(ngModel)]="model.race"
+                   required #race="ngModel"> Asian / Pacific Islander
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="race" id="raceoption2" autocomplete="off"
+                   value="American Indian / Alaskan Native" [(ngModel)]="model.race"
+                   required #race="ngModel">American Indian / Alaskan Native
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="race" id="raceoption3" autocomplete="off"
+                   value="Black / African American" [(ngModel)]="model.race"
+                   required #race="ngModel"> Black / African American
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="race" id="raceoption4" autocomplete="off"
+                   value="White" [(ngModel)]="model.race"
+                   required #race="ngModel"> White
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="race" id="raceoption5" autocomplete="off"
+                   value="other" [(ngModel)]="model.race"
+                   required #race="ngModel"> Other
+          </label>
+        </div>
+      </div>
+      <div [hidden]="race.valid || race.pristine"
+           class="alert alert-dark"> A correctly formatted value is required.
+      </div>
+
+      <div class="input-group mb-3 ">
+        <label class="input-group-text" >Gender</label>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-dark">
+            <input type="radio" name="gender" id="genderoption1" autocomplete="on"
+                   value="male" [(ngModel)]="model.sex"
+                   required #genderEntry="ngModel"> Male
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="gender" id="genderoption2" autocomplete="off"
+                   value="female" [(ngModel)]="model.sex"
+                   required #genderEntry="ngModel">Female
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="gender" id="genderoption3" autocomplete="off"
+                   value="Non-binary/Not Specified" [(ngModel)]="model.sex"
+                   required #genderEntry="ngModel"> Non-binary / Not Specified
+          </label>
+      </div>
+      </div>
+      <div [hidden]="genderEntry.valid || genderEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value is required.
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="placeOfBirth">Place of Birth</label>
+        <input class="form-control" name="placeOfBirth" id="placeOfBirth" [(ngModel)]="model.placeOfBirth"
+               pattern="^[a-zA-Z]+$" required minlength="2" #placeOfBirthEntry="ngModel"/>
+      </div>
+      <div [hidden]="placeOfBirthEntry.valid || placeOfBirthEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value is required.
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="otherStates">Other States you have resided.</label>
+        <input class="form-control" name="otherStates" id="otherStates" [(ngModel)]="model.otherStates"
+               pattern="^[a-zA-Z]+$"  minlength="2" #otherStatesEntry="ngModel"/>
+      </div>
+      <div [hidden]="otherStatesEntry.valid || otherStatesEntry.pristine"
+           class="alert alert-dark"> A correctly formatted value is required.
+      </div>
+      <div class="mb-3">
+        <h2>Proof of Government ID Document Type:</h2>
+        <p class="lead">A copy of this document must be submitted with application.</p>
+      </div>
+
+      <div class="input-group mb-3 justify-content-center">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-dark">
+            <input type="radio" name="idType" id="option1" autocomplete="on"
+                   value="Passport" [(ngModel)]="model.idType"
+                   required > Passport
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="idType" id="option2" autocomplete="off"
+                   value="Identification Card" [(ngModel)]="model.idType"
+                   required > Identification Card
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="idType" id="option3" autocomplete="off"
+                   value="Driver's license" [(ngModel)]="model.idType"
+                   required > Driver's License
+          </label>
+          <label class="btn btn-dark">
+            <input type="radio" name="idType" id="option4" autocomplete="off"
+                   value="Other" [(ngModel)]="model.idType"
+                   required > Other
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Please attach an image ( .jpg ) of your {{model.govIdProof}} document.</label>
+        <input class="form-control" type="file" id="formFile" [(ngModel)]="model.govIdProof"
+               name="govIdProof">
+      </div>
+      <button class="btn btn-outline-light" type="submit"
+              [disabled]="!applicationForm.valid">Next</button>
+    </form>
+  </main>
+  <footer class="mt-5 my-auto text-white-50">
+    <p>
+      Cover for testing
+      <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+      , from
+      <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+    </p>
+
+  </footer>
+</div>
+</body>

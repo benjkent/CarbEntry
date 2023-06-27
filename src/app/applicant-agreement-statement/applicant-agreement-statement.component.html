@@ -1,0 +1,63 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-100 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <div class="mb-5">
+    <h1>Attention</h1>
+    <p class="lead">Oregon law allows for the denial or revocation of a permit to purchase if you do not meet the minimum qualifications set out
+      in 2022 Ballot Measure 114 or if the Law Enforcement agency has reasonable grounds to believe you have been or are
+      reasonably likely to be a danger to yourself, or to the community at large, as a result of your mental or psychological state
+      or as demonstrated by your past pattern of behavior involving unlawful violence or threats of unlawful violence.</p>
+    <p class="strong">I have read and understand the above statement. </p>
+    <button class="btn btn-outline-light" (click)="agreementButton()">I Agree</button>
+      <button class="btn btn-outline-secondary mx-3" (click)="disagreementButton()">I Don't Agree</button>
+    </div>
+
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()" [hidden]="agree == false" >
+
+      <div  class="row mb-5">
+        <div class="col-4"></div>
+        <div class="col-4 ">
+          <input class="form-control" type="text" placeholder="initial here"
+          name="applicantInitials" [(ngModel)]="model.applicantInitials"
+          required minlength="2" maxlength="6" />
+        </div>
+        <div class="col-4"></div>
+      </div>
+
+      <button class="btn btn-outline-light" type="submit"
+              [disabled]="!applicationForm.form.valid">Next</button>
+    </form>
+
+    <app-modal id="modal-1">
+      <div class="modal-header">
+        <h5 class="modal-title">Warning</h5>
+        <button type="button" class="btn-close" (click)="modalService.close();"></button>
+      </div>
+      <div class="modal-body">
+        <p class="lead">Your decision to disagree will end this application process.</p>
+        <p>All the information you have entered thus far will not be processed. </p>
+        <p>We understand that a willingness to undergo a background check is stressful, rest assured the results are private.</p>
+        <p>Ultimately the decision to proceed is completely up to you.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="closeQuit()">I still disagree - End my application</button>
+        <button type="button" class="btn btn-secondary" (click)="modalService.close();">Return to application</button>
+      </div>
+    </app-modal>
+  </main>
+  <footer class="mt-5 my-auto text-white-50">
+    <p>
+      Cover for testing
+      <a href="https://jetbrains.com/aqua/" class="text-white">Aqua</a>
+      , from
+      <a href="https://jetbrains.com" class="text-white">JetBrains</a>
+    </p>
+  </footer>
+
+
+</div>
+</body>
+
+
+

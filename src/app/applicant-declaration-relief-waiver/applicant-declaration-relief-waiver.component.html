@@ -1,0 +1,84 @@
+<app-nav-bar [links]="navLinks"></app-nav-bar>
+<body class="d-flex vh-50 text-center text-bg-dark">
+<div class="container d-flex w-100 h-50 p-3 mx-auto flex-column">
+  <main class="px-3 my-auto">
+    <div class="mb-5">
+      <h1>Declarations Relief Waiver</h1>
+      <p class="lead">Since you were unable to initial all the previous Declaration Statements as true. </p>
+      <div class="mb-5">
+        <button class="btn btn-outline-light" type="submit"
+                (click)="returnToDeclarations()" >Return to Declarations</button>
+      </div>
+      <p class="strong">Have you been granted relief under either ORS 166.273, 166.274, or 18 USC 925(c)</p>
+    </div>
+
+    <form #applicationForm="ngForm" (ngSubmit)="onNext()" >
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-10">
+            <span >
+              I have been granted relief under either ORS 166.273, 166.274, or 18 USC 925(c). (Initial if true)
+            </span>
+          </div>
+          <div class="col-2">
+            <input class="form-control" name="reliefWaiver" id="exception"
+             [(ngModel)]="model.applicantWaiverInitials"
+            required />
+          </div>
+        </div>
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-9">
+            <span>Date relief was granted</span>
+          </div>
+          <div class="col-3">
+            <input class="form-control" name="reliefDate"
+            [(ngModel)]="model.reliefGrantedDate"
+            required />
+          </div>
+        </div>
+      </div>
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-9">
+            <label>The conviction the relief was granted for was a (Felony, Misdemeanor, or both)</label>
+          </div>
+          <div class="col-3">
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+              <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"
+              [(ngModel)]="model.convictionTypeFelony" name="felony"
+              (change)="checkBoxChange($event)" value="felony" >
+              <label class="btn btn-outline-primary" for="btncheck1">Felony</label>
+
+              <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off"
+                     [(ngModel)]="model.convictionTypeMisdemeanor" name="misdemeanor"
+                     (change)="checkBoxChange($event)" value="misdemeanor">
+              <label class="btn btn-outline-primary" for="btncheck2">Misdemeanor</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mb-5">
+        <h3>Note</h3>
+        <p class="lead">
+          Proof of relief may be required with this application. Even if relief has been granted under either ORS 166.273, 166.274, or 18 USC 925(c) firearm rights
+          are not restored until all core civil rights have been substantially restored. To be substantially restored, your following core rights must be restored: 1. The right to
+          vote, 2. The right to hold public office, and 3. The right to sit on a jury. Article 1 Section 45 of the Oregon Constitution limits the rights of persons convicted of
+          misdemeanors or felonies. Therefore, granted relief will only be valid for firearm transfers after 15 years has passed from the completion of a sentence for felony
+          convictions and 5 years for misdemeanor convictions. Unless firearm rights have been substantially restored for any of the above un-initialed questions and the
+          appropriate time has passed for the relief you were granted you will be disqualified for a Permit to Purchase by Oregon State Police, as those are disqualifiers for
+          the transfer of a firearm per State and/or Federal laws.
+        </p>
+      </div>
+      <div class="container" *ngIf=" model.convictionTypeFelony || model.convictionTypeMisdemeanor">
+        <button class="btn btn-outline-light" type="submit"
+                [disabled]="!applicationForm.valid ">Next</button>
+      </div>
+
+    </form>
+  </main>
+</div>
+
+</body>
+
